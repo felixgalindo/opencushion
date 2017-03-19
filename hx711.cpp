@@ -81,7 +81,7 @@ int32_t HX711::readAverage(uint8_t times) {
 	int32_t value = 0;
 	for (uint8_t i = 0; i < times; i++) {
 		value = read();
-		if(value != -255{
+		if(value != -255){
 		sum += read();
 		}
 		else{
