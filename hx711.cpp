@@ -48,9 +48,7 @@ void HX711::setGain(uint8_t gain){
 
 int32_t HX711::read() {
 	// wait for the chip to become ready
-	//while (!this->isReady());
-	if(!this->isReady())
-		return -255;
+	while (!this->isReady());
 
 	int32_t data = 0;
 	// pulse the clock pin 24 times to read the data
@@ -80,22 +78,20 @@ int32_t HX711::readAverage(uint8_t times) {
 	int64_t sum = 0;
 	int32_t value = 0;
 	for (uint8_t i = 0; i < times; i++) {
-		value = read();
-		if(value != -255){
 		sum += read();
-		}
-		else{
-	 	   i--;
-		 }
 	}
 	return sum / times;
 }
 
 int32_t HX711::getRawValue(uint8_t times) {
+	int32_t value = read();
 	return readAverage(times) - mOffset;
 }
 
 float HX711::getUnits(uint8_t times) {
+	if(!this->isReady()){
+		return -255;
+	}
 	return getRawValue(times) / mScale;
 }
 
