@@ -100,6 +100,17 @@ void HX711Wrapper::getUnits(const FunctionCallbackInfo<Value>& args) {
         args.GetReturnValue().Set(Number::New(isolate, value));
 }
 
+void HX711Wrapper::isReady(const FunctionCallbackInfo<Value>& args) {
+        Isolate* isolate = args.GetIsolate();
+
+        uint8_t timesArg = args[0]->IsUndefined() ? 10 : args[0]->NumberValue();
+
+        HX711Wrapper* obj = ObjectWrap::Unwrap<HX711Wrapper>(args.Holder());
+        boolean value = obj->mSensor->isReady(timesArg);
+
+        args.GetReturnValue().Set(Number::New(isolate, value));
+}
+
 void HX711Wrapper::setGain(const FunctionCallbackInfo<Value>& args) {
         Isolate* isolate = args.GetIsolate();
 
