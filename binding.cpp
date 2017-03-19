@@ -100,16 +100,6 @@ void HX711Wrapper::getUnits(const FunctionCallbackInfo<Value>& args) {
         args.GetReturnValue().Set(Number::New(isolate, value));
 }
 
-void HX711Wrapper::isReady(const FunctionCallbackInfo<Value>& args) {
-        Isolate* isolate = args.GetIsolate();
-
-        HX711Wrapper* obj = ObjectWrap::Unwrap<HX711Wrapper>(args.Holder());
-        int32_t value = obj->mSensor->getOffset();
-
-        args.GetReturnValue().Set(Number::New(isolate, value));
-}
-
-
 void HX711Wrapper::setGain(const FunctionCallbackInfo<Value>& args) {
         Isolate* isolate = args.GetIsolate();
 
@@ -138,6 +128,16 @@ void HX711Wrapper::getScale(const FunctionCallbackInfo<Value>& args) {
 
         args.GetReturnValue().Set(Number::New(isolate, value));
 }
+
+void HX711Wrapper::isReady(const FunctionCallbackInfo<Value>& args) {
+        Isolate* isolate = args.GetIsolate();
+
+        HX711Wrapper* obj = ObjectWrap::Unwrap<HX711Wrapper>(args.Holder());
+        int32_t value = obj->mSensor->getOffset();
+
+        args.GetReturnValue().Set(Number::New(isolate, value));
+}
+
 
 void HX711Wrapper::New(const FunctionCallbackInfo<Value>& args) {
   	Isolate* isolate = args.GetIsolate();
