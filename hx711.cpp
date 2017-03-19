@@ -84,7 +84,6 @@ int32_t HX711::readAverage(uint8_t times) {
 }
 
 int32_t HX711::getRawValue(uint8_t times) {
-	int32_t value = read();
 	return readAverage(times) - mOffset;
 }
 
