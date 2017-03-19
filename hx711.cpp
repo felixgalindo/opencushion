@@ -76,7 +76,6 @@ int32_t HX711::read() {
 
 int32_t HX711::readAverage(uint8_t times) {
 	int64_t sum = 0;
-	int32_t value = 0;
 	for (uint8_t i = 0; i < times; i++) {
 		sum += read();
 	}
@@ -88,9 +87,6 @@ int32_t HX711::getRawValue(uint8_t times) {
 }
 
 float HX711::getUnits(uint8_t times) {
-	if(!this->isReady()){
-		return -255;
-	}
 	return getRawValue(times) / mScale;
 }
 
